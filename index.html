@@ -127,11 +127,11 @@ section{padding:108px 0}.intro-top{display:grid;grid-template-columns:.92fr 1.08
       <div class="location-item"><strong>Veldtraining</strong>SEV · Sportparkweg 4, 2263 SX Leidschendam · <a href="https://www.google.com/maps/search/?api=1&amp;query=Sportparkweg+4%2C+2263+SX+Leidschendam" target="_blank" rel="noopener">Route →</a></div>
       <div class="location-item"><strong>Coachgesprekken</strong>Burgemeester Caan van Necklaan 122, 2262 GV Leidschendam · <a href="https://www.google.com/maps/search/?api=1&amp;query=Burgemeester+Caan+van+Necklaan+122%2C+2262+GV+Leidschendam" target="_blank" rel="noopener">Route →</a></div>
     </div>
-  </div><form class="contact-card" id="leadForm"><div class="field"><label for="name">Naam</label><input id="name" name="name" autocomplete="name" required placeholder="Jouw naam"></div><div class="field"><label for="email">E-mailadres</label><input type="email" id="email" name="email" autocomplete="email" required placeholder="naam@email.nl"></div><div class="field"><label for="phone">Telefoonnummer <span style="font-weight:500;text-transform:none;letter-spacing:0">(optioneel)</span></label><input id="phone" name="phone" autocomplete="tel" placeholder="06 ..."></div><input type="checkbox" name="botcheck" style="display:none"><button class="btn primary" type="submit">Laat Robin contact opnemen →</button><div class="direct"><a href="mailto:RDBfootballdevelopment@gmail.com">Mail Robin</a><a href="tel:+31653351084">Bel Robin</a></div><div class="success" id="success" aria-live="polite"></div></form></div>
-  <div class="clubnote"><p><strong>Club of voetbalopleiding?</strong> Ook voor samenwerking rond individuele spelersontwikkeling kun je contact opnemen.</p><a href="mailto:RDBfootballdevelopment@gmail.com" class="btn light">Neem contact op</a></div>
+  </div><form class="contact-card" id="leadForm"><div class="field"><label for="name">Naam</label><input id="name" name="name" autocomplete="name" required placeholder="Jouw naam"></div><div class="field"><label for="email">E-mailadres</label><input type="email" id="email" name="email" autocomplete="email" required placeholder="naam@email.nl"></div><div class="field"><label for="phone">Telefoonnummer <span style="font-weight:500;text-transform:none;letter-spacing:0">(optioneel)</span></label><input id="phone" name="phone" autocomplete="tel" placeholder="06 ..."></div><input type="checkbox" name="botcheck" style="display:none"><button class="btn primary" type="submit">Laat Robin contact opnemen →</button><div class="direct"><a href="mailto:rdbfootballdevelopment@gmail.com">Mail Robin</a><a href="tel:+31653351084">Bel Robin</a></div><div class="success" id="success" aria-live="polite"></div></form></div>
+  <div class="clubnote"><p><strong>Club of voetbalopleiding?</strong> Ook voor samenwerking rond individuele spelersontwikkeling kun je contact opnemen.</p><a href="mailto:rdbfootballdevelopment@gmail.com" class="btn light">Neem contact op</a></div>
 </div></section>
 </main>
-<footer><div class="wrap foot"><a href="#top" class="brand"><div class="brandmark">RDB</div><div class="brandsub">Football<br>Development</div></a><small>RDB Football Development · KvK 92137946 · <a href="mailto:RDBfootballdevelopment@gmail.com">RDBfootballdevelopment@gmail.com</a> · <a href="tel:+31653351084">06 5335 1084</a></small></div></footer>
+<footer><div class="wrap foot"><a href="#top" class="brand"><div class="brandmark">RDB</div><div class="brandsub">Football<br>Development</div></a><small>RDB Football Development · KvK 92137946 · <a href="mailto:rdbfootballdevelopment@gmail.com">rdbfootballdevelopment@gmail.com</a> · <a href="tel:+31653351084">06 5335 1084</a></small></div></footer>
 <a class="mobile-cta" href="#contact">Gratis kennismaken →</a>
 <script>
 // Hero carousel
@@ -141,19 +141,20 @@ function startCarousel(){if(window.matchMedia('(prefers-reduced-motion: reduce)'
 dots.forEach((d,i)=>d.addEventListener('click',()=>{showSlide(i);startCarousel()}));startCarousel();
 // Route tabs
 const tabs=[...document.querySelectorAll('.route-tab')];tabs.forEach(tab=>tab.addEventListener('click',()=>{tabs.forEach(t=>t.classList.remove('active'));tab.classList.add('active');document.querySelectorAll('.route-panel').forEach(p=>p.classList.remove('active'));document.getElementById('route-'+tab.dataset.route).classList.add('active')}));
-// Contact form — add the Web3Forms access key below when available.
-// Until then, submitting safely opens a pre-addressed email to Robin.
-const WEB3FORMS_ACCESS_KEY='PASTE_WEB3FORMS_ACCESS_KEY_HERE';
+// Contact form — Web3Forms.
+// If no access key is configured, submitting safely opens a pre-addressed email to Robin.
+const WEB3FORMS_ACCESS_KEY='b4d9e74e-61a4-4a81-82bc-9f9d07cc45bd';
 const form=document.getElementById('leadForm'),statusBox=document.getElementById('success');
 form.addEventListener('submit',async e=>{
   e.preventDefault();
   const name=document.getElementById('name').value.trim(),email=document.getElementById('email').value.trim(),phone=document.getElementById('phone').value.trim();
   const payload={access_key:WEB3FORMS_ACCESS_KEY,subject:'Nieuwe aanvraag gratis kennismaking — RDB Football Development',from_name:'RDB Football Development website',name,email,phone};
+  if(form.elements.botcheck.checked)payload.botcheck='on';
   statusBox.style.display='block';
-  if(!WEB3FORMS_ACCESS_KEY||WEB3FORMS_ACCESS_KEY==='PASTE_WEB3FORMS_ACCESS_KEY_HERE'){
+  if(!WEB3FORMS_ACCESS_KEY){
     const body=`Naam: ${name}\nE-mail: ${email}\nTelefoon: ${phone||'-'}\n\nIk wil graag een gratis kennismaking plannen.`;
     statusBox.textContent='Je e-mailprogramma wordt geopend zodat je aanvraag direct naar Robin kunt sturen.';
-    window.location.href=`mailto:RDBfootballdevelopment@gmail.com?subject=${encodeURIComponent(payload.subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href=`mailto:rdbfootballdevelopment@gmail.com?subject=${encodeURIComponent(payload.subject)}&body=${encodeURIComponent(body)}`;
     return;
   }
   statusBox.textContent='Even versturen…';
